@@ -156,7 +156,7 @@
         //Consulta para insertar COLABORADOR
         $consultaStr="INSERT INTO colaboradores (usuario, nombre, puesto, rango, ruta_foto, estatus, sucursal) VALUES (?,?,?,?,?,?,?)";
         $consulta=$db->prepare($consultaStr);
-        $consulta->execute([$idUsuario, $socios[$i]["nombre"], 14, 'Socio Acil', 'cilo.jpg', 0,1]);
+        $consulta->execute([$idUsuario, $socios[$i]["nombre"]." ".$socios[$i]["apellido"], 14, 'Socio Acil', 'cilo.jpg', 0,1]);
 
         //Consulta para extraer id_colaborador
         $consultaStr="SELECT * FROM colaboradores WHERE nombre=?";
@@ -168,9 +168,9 @@
         //Funcion para crear contraseña
         $pass=createPass($socios[$i]["nombre"], $socios[$i]["apellido"]);
 
-        $consultaStr="UPDATE usuarios SET pass='$pass' WHERE id_usuario=?";
+        $consultaStr="UPDATE usuarios SET username=?, pass=? WHERE id_usuario=?";
         $consulta=$db->prepare($consultaStr);
-        $consulta->execute([$idUsuario]); 
+        $consulta->execute([$idColaborador, $pass, $idUsuario]); 
         
         $carpeta = $root."docs/partners/".$idUsuario;
         if (!is_dir($carpeta)) 

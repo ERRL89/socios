@@ -8,26 +8,45 @@
 <!-- Formulario de Registro de Nuevo Usuario -->
 <div class="mb-5">
   <h2 class="text-center">Formulario de Registro</h2>
-  <h6 class="text-center">* Porfavor llene los campos solicitados *</h6>
+  <h5 class="text-center textCustom fw-bold">SOCIOS ACIL</h5>
+  <h6 class="text-center">* Por favor llene los campos solicitados *</h6>
   <form id="form">
     <!-- Formulario de Contrato -->
     <div class="container-sm container_form_custom">
 
-      <div class="mb-3 "><!-- Nombre/Numero de Referido -->
+      <span class="mb-5 fw-bold fst-italic fs-5 textCustom">Datos generales</span>
+
+      <div class="mt-3 mb-3 "><!-- Nombre/Numero de Referido -->
        <div class="row mb-3">
           <div class="col-md-8"><!-- Nombre -->
-            <label for="nombre" class="form-label label-custom">Nombre:</label>
+            <label for="nombre" class="form-label label-custom">Nombre/Razón social:</label>
             <input type="text" class="form-control" id="nombre" name="nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+" required>
             <div class="invalid-feedback">Introduce tu Nombre</div>
           </div>
           <div class="col-md-4"><!-- Numero de Referido -->
               <label for="referido" class="form-label label-custom">Número de Referido:</label>
-              <input type="number" class="form-control sinBotonera" id="numReferido" name="referido">
+              <input type="number" class="form-control sinBotonera" id="referido" name="referido">
           </div>
         </div>
       </div>
 
-      <div class="mb-3"><!-- Direccion: Calle - Numero - Colonia -->
+      <div class="mb-3 "><!-- Representante Legal/Nacionalidad/RFC -->
+       <div class="row mb-3">
+          <div class="col-md-6"><!-- Representante Legal -->
+            <label for="representanteLegal" class="form-label label-custom">Representante Legal:</label>
+            <input type="text" class="form-control" id="representanteLegal" name="representanteLegal">
+          </div>
+          <div class="col-md-6"><!-- Nacionalidad -->
+            <label for="nacionalidad" class="form-label label-custom">Nacionalidad:</label>
+            <input type="text" class="form-control" id="nacionalidad" name="nacionalidad" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+" required>
+            <div class="invalid-feedback">Introduce tu nacionalidad</div>
+          </div>
+        </div>
+      </div>
+
+      <span class="mb-5 fw-bold fst-italic fs-5 textCustom">Datos de contácto</span>
+
+      <div class="mb-3 mt-3"><!-- Direccion: Calle - Numero - Codigo Postal -->
         <label for="direccion" class="form-label label-custom">Dirección:</label>
         <div class="row mb-3">
           <div class="col-md-6 mb-2">
@@ -39,26 +58,62 @@
             <div class="invalid-feedback">Introduce tu numero</div>
           </div>
           <div class="col-md-3 mb-2">
-            <input type="text" class="form-control form-input" placeholder="Colonia" id="colonia" name="colonia" required>
+            <input type="number" class="form-control form-input" placeholder="Codigo Postal" id="cp" name="cp" required>
+            <div class="invalid-feedback">Introduce tu codigo postal</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3"><!-- Estado - Municipio - Colonia -->
+        <div class="row mb-3">
+        <div class="col-md-4 mb-2">
+            <input type="text" class="form-control form-input" placeholder="Municipio" id="municipio" name="municipio" required disabled>
+            <div class="invalid-feedback">Introduce tu municipio</div>
+          </div>
+          <div class="col-md-4 mb-2">
+            <input type="text" class="form-control form-input" placeholder="Estado" id="estado" name="estado" required disabled>
+            <div class="invalid-feedback">Introduce tu estado</div>
+          </div>
+          <div class="col-md-4 mb-2">
+          <select class="form-select" id="colonia" aria-label="Default select example" required>
+            <option selected disabled>Selecciona tu colonia:</option>
+          </select>
             <div class="invalid-feedback">Introduce tu colonia</div>
           </div>
         </div>
       </div>
 
-      <div><!-- Telefono/Email -->
+      <div class="mt-3"><!-- Telefono/Email -->
         <div class="row mb-3">
             <div class="col-md-6"><!-- Telefono -->
-              <label for="phone" class="form-label label-custom">Teléfono:</label>
-              <input type="number" class="form-control sinBotonera" id="telefono" name="phone" placeholder="5512345678" required>
+              <label for="telefono" class="form-label label-custom">Teléfono:</label>
+              <input type="number" class="form-control sinBotonera" id="telefono" name="telefono" required>
               <div class="invalid-feedback">Introduce tu teléfono</div>
             </div>
             <div class="col-md-6"><!-- Email -->
               <label for="email" class="form-label label-custom">Email:</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="ejemplo@acil.mx" required>
+              <input type="email" class="form-control" id="email" name="email" required>
               <div class="invalid-feedback">Introduce tu email</div>
             </div>
         </div>
       </div>
+
+      <span class="mb-5 fw-bold fst-italic fs-5 textCustom">Datos Bancarios</span>
+
+      <div class="mb-3 mt-3"><!-- Cuenta Clabe/RFC -->
+       <div class="row mb-3">
+          <div class="col-md-6"><!-- Cuenta clabe -->
+            <label for="cuentaClabe" class="form-label label-custom">Cuenta Clabe:</label>
+            <input type="number" class="form-control sinBotonera" id="cuentaClabe" name="cuentaClabe" required>
+          </div>
+          <div class="col-md-6"><!-- RFC -->
+            <label for="rfc" class="form-label label-custom">RFC:</label>
+            <input type="text" class="form-control" id="rfc" name="rfc" required>
+            <div class="invalid-feedback">Introduce tu RFC</div>
+          </div>
+        </div>
+      </div>
+
 
      <!-- Boton de Contratar launchUploadFiles() -->
       <div class="container-fluid d-flex justify-content-center align-items-center ctBtnCustom">

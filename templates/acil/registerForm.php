@@ -16,15 +16,20 @@
 
       <span class="mb-5 fw-bold fst-italic fs-5 textCustom">Datos generales</span>
 
-      <div class="mt-3 mb-3 "><!-- Nombre/Numero de Referido -->
+      <div class="mt-3 mb-3 "><!-- Nombre/Apellido/Numero de Referido -->
        <div class="row mb-3">
-          <div class="col-md-8"><!-- Nombre -->
-            <label for="nombre" class="form-label label-custom">Nombre/Razón social:</label>
+          <div class="col-md-5"><!-- Nombre -->
+            <label for="nombre" class="form-label label-custom">Nombre:</label>
             <input type="text" class="form-control" id="nombre" name="nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+" required>
             <div class="invalid-feedback">Introduce tu Nombre</div>
           </div>
-          <div class="col-md-4"><!-- Numero de Referido -->
-              <label for="referido" class="form-label label-custom">Número de Referido:</label>
+          <div class="col-md-5"><!-- Apellido -->
+            <label for="apellido" class="form-label label-custom">Apellido:</label>
+            <input type="text" class="form-control" id="apellido" name="apellido" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+">
+            <div class="invalid-feedback">Introduce tu Apellido</div>
+          </div>
+          <div class="col-md-2"><!-- Numero de Referido -->
+              <label for="referido" class="form-label label-custom"># Referido:</label>
               <input type="number" class="form-control sinBotonera" id="referido" name="referido">
           </div>
         </div>
@@ -32,10 +37,12 @@
 
       <div class="mb-3 "><!-- Representante Legal/Nacionalidad/RFC -->
        <div class="row mb-3">
-          <div class="col-md-6"><!-- Representante Legal -->
-            <label for="representanteLegal" class="form-label label-custom">Representante Legal:</label>
-            <input type="text" class="form-control" id="representanteLegal" name="representanteLegal">
+          <div class="col-md-6"><!-- RFC -->
+            <label for="rfc" class="form-label label-custom">RFC:</label>
+            <input type="text" class="form-control" id="rfc" name="rfc" required>
+            <div class="invalid-feedback">Introduce tu RFC</div>
           </div>
+          
           <div class="col-md-6"><!-- Nacionalidad -->
             <label for="nacionalidad" class="form-label label-custom">Nacionalidad:</label>
             <input type="text" class="form-control" id="nacionalidad" name="nacionalidad" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+" required>
@@ -98,24 +105,18 @@
         </div>
       </div>
 
-      <span class="mb-5 fw-bold fst-italic fs-5 textCustom">Datos Bancarios</span>
+      <span class="mt-3 mb-5 fw-bold fst-italic fs-5 textCustom">Datos Bancarios</span>
 
       <div class="mb-3 mt-3"><!-- Cuenta Clabe/RFC -->
        <div class="row mb-3">
           <div class="col-md-6"><!-- Cuenta clabe -->
-            <label for="cuentaClabe" class="form-label label-custom">Cuenta Clabe:</label>
-            <input type="number" class="form-control sinBotonera" id="cuentaClabe" name="cuentaClabe" required>
-          </div>
-          <div class="col-md-6"><!-- RFC -->
-            <label for="rfc" class="form-label label-custom">RFC:</label>
-            <input type="text" class="form-control" id="rfc" name="rfc" required>
-            <div class="invalid-feedback">Introduce tu RFC</div>
+            <label for="clabe" class="form-label label-custom">Clabe interbancaria:</label>
+            <input type="number" class="form-control sinBotonera" id="clabe" name="clabe" required>
           </div>
         </div>
       </div>
 
-
-     <!-- Boton de Contratar launchUploadFiles() -->
+      <!-- Boton de Contratar launchUploadFiles() -->
       <div class="container-fluid d-flex justify-content-center align-items-center ctBtnCustom">
           <?php
             $btn="
@@ -137,39 +138,71 @@
   </form>
 </div>
 
-<!-- MODAL-->
-<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="progress">
-                    <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
-                </div>
-                <center><h2 id="progress-text">Procesando...</h2></center>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Funcionalidad de codigo postal mediante api -->
+<script>
+  const elemento = document.getElementById('cp');
+  let selectColonia = document.getElementById('colonia');
+  
+  function miFuncion() {
+      $.ajax({
+						url: 'resources/api_cp/cp.php',
+						type: 'POST',
+            dataType: 'json',
+            data:{
+              codigoPostal:$('#cp').val()
+            },
+						success: function(result)
+						{
+              $('#colonia').empty();
+
+              console.log(result); 
+              $('#estado').val(result.codigo_postal.estado)
+              $('#municipio').val(result.codigo_postal.municipio)
+
+              colonia=result.codigo_postal.colonias
+              console.log(colonia)
+
+              for(let i=0; i<=colonia.length-1; i++){
+                let nuevaOpcion = document.createElement('option');
+                nuevaOpcion.value = result.codigo_postal.colonias[i];
+                nuevaOpcion.textContent = result.codigo_postal.colonias[i]; 
+                selectColonia.appendChild(nuevaOpcion);
+              }
+						}
+					});
+  }
+
+  elemento.addEventListener('change', miFuncion);
+</script>
 
 <!-- Envio a Process para guardar usuario -->
 <script>
+  let form = document.getElementById("form");
     function launchUploadFiles(){
-            var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-            modal.show();
-            var progressBar = $('#progress-bar');
-            var progressText = $('#progress-text');
             
-            $.ajax({
+            if (form.checkValidity())
+            {
+              var progressBar = $('#progress-bar');
+              var progressText = $('#progress-text');
+              $.ajax({
                 url: 'registerProcess.php',
                 type: 'POST',
                 data: 
                 {
                     nombre: $('#nombre').val(),
+                    apellido: $('#apellido').val(),
+                    referido: $('#referido').val(),
+                    nacionalidad: $('#nacionalidad').val(),
                     calle: $('#calle').val(),
                     numero: $('#numero').val(),
+                    cp: $('#cp').val(),
+                    municipio: $('#municipio').val(),
+                    estado: $('#estado').val(),
                     colonia: $('#colonia').val(),
+                    telefono: $('#telefono').val(),
                     email: $('#email').val(),
-                    phone: $('#telefono').val()
+                    clabe: $('#clabe').val(),
+                    rfc: $('#rfc').val()
                 },
                 xhr: function() {
                     var xhr = new window.XMLHttpRequest();
@@ -184,12 +217,15 @@
                 },
                 success: function(result) {
                     $('#principal').html(result);
-                    modal.hide();
                 }
-            });
+              });
+            }
+            else 
+            {
+              form.classList.add('was-validated')
+            }    
     }
 </script>
-
 
 <!-- Control de botones y captcha -->
 <script>

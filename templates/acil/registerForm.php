@@ -98,9 +98,7 @@
 
 <!-- Envio a Process para guardar usuario -->
 <script>
-    <?php
-    echo "
-        function launchUploadFiles(){
+    function launchUploadFiles(){
             var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
             modal.show();
             var progressBar = $('#progress-bar');
@@ -134,9 +132,7 @@
                     modal.hide();
                 }
             });
-        }
-    ";
-    ?>
+    }
 </script>
 
 

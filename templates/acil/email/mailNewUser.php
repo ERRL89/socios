@@ -119,7 +119,7 @@
                                                             </tbody>
                                                         </table>
                                                         <p class='text-dark text-justify' style='line-height: 24px; font-size: 16px; color: #1a202c; width: 100%; margin: 0;' align='justify'>
-                                                            Hola, <strong>$nombre</strong>
+                                                            Hola, <strong>$nombreUsuario</strong>
                                                         </p>
                                                         <table class='s-3 w-full' role='presentation' border='0' cellpadding='0' cellspacing='0' style='width: 100%;' width='100%'>
                                                             <tbody>
@@ -143,7 +143,7 @@
                                                             </tbody>
                                                         </table>
                                                         <ul class='text-dark text-justify' style='color: #1a202c; text-align: justify !important;'>
-                                                            <li>Usuario: $emailUsuario</li>
+                                                            <li>Usuario: $idColaborador</li>
                                                             <li>Contrase&#241;a: $pass</li>
                                                         </ul>
                                                         <table class='s-3 w-full' role='presentation' border='0' cellpadding='0' cellspacing='0' style='width: 100%;' width='100%'>
@@ -156,7 +156,7 @@
                                                             </tbody>
                                                         </table>
                                                         <p class='text-dark text-justify' style='line-height: 24px; font-size: 16px; color: #1a202c; width: 100%; margin: 0;' align='justify'>
-                                                            Para continuar con el proceso, es necesario cargar la documentaci&#243;n correspondiente. Por favor, haz clic en el enlace a continuaci&#243;n para continuar.
+                                                            El siguiente enlace te llevara hacia la plataforma donde podras cerrar tus procesos de venta.
                                                         </p>
                                                         <table class='s-3 w-full' role='presentation' border='0' cellpadding='0' cellspacing='0' style='width: 100%;' width='100%'>
                                                             <tbody>
@@ -195,7 +195,7 @@
                                                                     <tbody>
                                                                         <tr>
                                                                         <td style='line-height: 24px; font-size: 16px; border-radius: 6px; margin: 0;' align='center' bgcolor='#0d6efd'>
-                                                                            <a href='https://acil.mx/intranet' style='color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; background-color: #0d6efd; padding: 8px 12px; border: 1px solid #0d6efd;'>Carga tus Documentos</a>
+                                                                            <a href='https://acil.mx/intranet' style='color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; background-color: #0d6efd; padding: 8px 12px; border: 1px solid #0d6efd;'>Inicia sesión</a>
                                                                         </td>
                                                                         </tr>
                                                                     </tbody>

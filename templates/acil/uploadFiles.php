@@ -71,18 +71,6 @@
       <!-- ------------------------ ID DE USUARIO ---------------------------- -->
       <input type="hidden" name="idUsuario" id="nc" class="form-control" value="<?php echo $idUsuario;?>"/>
 
-      <!-- ------------------------CARGA DE COMPROBANTE DE DOMICILIO---------------------------- -->
-      <label for="domicilio" class="form-label label-custom">Comprobante de Domicilio</label>
-      <label id="comprobante_label_edit" class='form-label' style='color:#e25b19'>
-        <?php validateFile("comprobante_domicilio_",0);?>
-      </label>
-      <input type="file" name="domicilio" id="domicilio" class="form-control" accept=".pdf"/>
-      <div id='advertencia1' class='form-text' style='color: red;'>
-        <?php validateFile("comprobante_domicilio_",1);?>
-      </div><br>
-      <!-- ------------------------------------------------------------------------------------- -->
-
-
       <!-- --------------------------CARGA DE IDENTIFICACION OFICIAL---------------------------- -->
       <label for="identificacion" class="form-label label-custom">Identificación Oficial</label>
       <label id="ine_label_edit" class='form-label' style='color:#e25b19'>
@@ -94,15 +82,26 @@
       </div><br>
       <!-- ------------------------------------------------------------------------------------- -->
 
-      <!-- --------------------------CARGA DE COMPROBANTE DE PAGO---------------------------- -->
-      <label for="pago" class="form-label label-custom">Comprobante de Pago</label>
-      <label id="pago_label_edit" class='form-label' style='color:#e25b19'>
-        <?php validateFile("comprobante_pago_",0);?>
+      <!-- ------------------------CARGA DE COMPROBANTE DE DOMICILIO---------------------------- -->
+      <label for="domicilio" class="form-label label-custom">Comprobante de Domicilio</label>
+      <label id="comprobante_label_edit" class='form-label' style='color:#e25b19'>
+        <?php validateFile("comprobante_domicilio_",0);?>
       </label>
-      <input type="file" name="pago" id="pago" class="form-control" accept=".pdf"/>
-      <div id='advertencia3' class='form-text' style='color: red;'>
-        <?php validateFile("comprobante_pago_",1);?>
+      <input type="file" name="domicilio" id="domicilio" class="form-control" accept=".pdf"/>
+      <div id='advertencia1' class='form-text' style='color: red;'>
+        <?php validateFile("comprobante_domicilio_",1);?>
       </div><br>
+      <!-- ------------------------------------------------------------------------------------- -->
+
+      <!-- --------------------------CARGA DE CONSTANCIA DE SITUACION FISCAL---------------------------- -->
+      <div id="constancia"><label for="file" class="form-label label-custom">Constancia de Situación Fiscal</label>
+      <label id="constancia_label_edit" class='form-label' style='color:#e25b19'>
+        <?php validateFile("constancia_situacion_fiscal_",0);?>
+      </label>
+      <input type="file" name="constanciaFiscal" id="constanciaFiscal" class="form-control" accept=".pdf"/>
+      <div id='advertencia5' class='form-text' style='color: red;'>
+        <?php validateFile("constancia_situacion_fiscal_",1);?>
+      </div></div><br>
       <!-- ------------------------------------------------------------------------------------- -->
 
       <!-- -------------------------------CARGA DE CONTRATO------------------------------------- -->
@@ -117,34 +116,9 @@
       <!-- ------------------------------------------------------------------------------------- -->
 
 
-      <div><!-- --------------------------¿REQUIERE FACTURA?---------------------------- -->
-            <label class="form-label">¿Requiere factura?</label>
-            <div class="form-check">
-                <input class="check-custom" type="radio" id="okFactura" value="1">
-                <label class="form-check-label">
-                    Si, requiero factura
-                </label>
-            </div>
-            <div class="form-check" id="formNoFactura">
-                <input class="check-custom" type="radio" id="noFactura" value="0" checked>
-                <label class="form-check-label">
-                    No, no requiero factura
-                </label>
-            </div>
-      </div><br>
-      <!-- ------------------------------------------------------------------------------------- -->
-
-
-      <!-- --------------------------CARGA DE CONSTANCIA DE SITUACION FISCAL---------------------------- -->
-      <div id="constancia"><label for="file" class="form-label label-custom">Constancia de Situación Fiscal</label>
-      <label id="constancia_label_edit" class='form-label' style='color:#e25b19'>
-        <?php validateFile("constancia_situacion_fiscal_",0);?>
-      </label>
-      <input type="file" name="constanciaFiscal" id="constanciaFiscal" class="form-control" accept=".pdf"/>
-      <div id='advertencia5' class='form-text' style='color: red;'>
-        <?php validateFile("constancia_situacion_fiscal_",1);?>
-      </div></div><br><br>
-      <!-- ------------------------------------------------------------------------------------- -->
+      
+      
+      
       <div class="container-fluid d-flex justify-content-center align-items-center flex-wrap gap-2 mb-3">
       <?php
             //Se asigna boton para subir archivos se actualiza de acuerdo a cada carga
@@ -219,43 +193,6 @@
 <!-- Control de selector Requiere/No Requiere Factura -->
 <script>
     $(document).ready(function(){
-        $("#constancia").hide()
-        <?php
-          if($constancia==1){
-            echo "
-                  $('#okFactura').prop('checked', true)
-                  $('#noFactura').prop('checked', false)
-                  $('#formNoFactura').hide()
-                  $('#constancia').show()
-                ";
-          }
-        ?>
-        $("#okFactura").change(function() {
-            if(this.checked) {//Si se selecciona "Si requiero factura"
-                $("#noFactura").prop("checked", false)//Retira seleccion a No requiero factura
-                $("#constancia").show()
-                $("#btnValidacion").hide()
-                
-               
-            } else {//Si se intenta quitar seleccion a opcion seleccionada no lo permite
-                if(!$("#noFactura").prop("checked")) {
-                    $(this).prop("checked", true);
-                }
-            }
-        })
-
-        $("#noFactura").change(function() {
-            if(this.checked) {
-                $("#okFactura").prop("checked", false)
-                $("#constancia").hide()
-                $("#btnValidacion").show()
-              
-            } else {
-                if(!$("#okFactura").prop("checked")) {
-                    $(this).prop("checked", true);
-                }
-            }
-        })
 
         $('input[type="file"]').change(function() {
             if (this.files && this.files.length > 0) {

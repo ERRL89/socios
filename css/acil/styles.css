@@ -48,6 +48,10 @@
     background: none;
 }
 
+.textCustom{
+    color: #E25B19 !important;
+}
+
 @media (min-width:760px) {
     .nav-acil {
         font-family: 'Gandhi-Bold';

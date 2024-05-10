@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
 .line_hr{
     border-color: rgb(226, 92, 25);
     border-width: 2px;
@@ -326,11 +333,11 @@ input{
 /**********Footer***********/
 
 .contenedor-footer {
-    position: absolute;
     bottom: 0;
     background-color: #E25B19;
     color: white;
     z-index: 8000;
+    margin-top: auto;
 }
 
 

@@ -10,7 +10,7 @@
                         </svg>
                     </div>
                     <div class="texto-sesion text-center">
-                        <h3><?php echo $messageSuccess; ?></h3>
+                        <?php echo $messageSuccess; ?>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,6 @@
 	$folderBase = "socios/";
     $theme = "acil";
 	$root = $_SERVER['DOCUMENT_ROOT'].'/'.$folderBase;
-    $routeAcil="https://acil.mx/quoteAssistant/";
 	
 	// INFORMACIÓN PARA TEST //
     #BASE DE DATOS

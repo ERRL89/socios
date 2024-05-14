@@ -7,33 +7,8 @@
 	include $root."resources/PHPMailer/src/PHPMailer.php";
 	include $root."resources/PHPMailer/src/SMTP.php";
 
-    function createPass($nombre, $apellido)
-    {
-        //Extrae 1er nombre para contraseña
-        $partesNombre = explode(" ", $nombre);
-        //print_r($partesNombre); echo "<br>";
-        $nombrePass=ucfirst($partesNombre[0]);
-        //echo $nombrePass."<br><br>";
-
-        //Extrae 1er apellido para contraseña
-        $partesApellido = explode(" ", $apellido);
-        //print_r($partesApellido); echo "<br>";
-        $longApellido=count($partesApellido);
-
-        for($i=0;$i<=$longApellido-1;$i++)
-        {
-            if(strlen($partesApellido[$i])>3)
-            {
-                    $apellidoPass=ucfirst($partesApellido[$i]);
-                    //echo $apellidoPass;
-                    break;
-            }
-        }
-
-        $pass=$nombrePass.$apellidoPass."123@";
-        //echo "<br><br>".$pass;
-        return $pass;
-    }
+    date_default_timezone_set('America/Mexico_City');
+    $fecha = date("d-m-Y");
 
     #SE RECIBEN VARIABLES DESDE REGISTER FORM
     if (isset($_POST["nombre"]))/*-------->*/{ $nombre= $_POST["nombre"]; }
@@ -82,11 +57,11 @@
             }
             //MENSAJE EL USUARIO YA EXISTE, INGRESE CON SUS CREDENCIALES DE INICIO DE SESION
             $userExist=1;
-            $messageSuccess="
+            $messageError="
                              <h4>El usuario ya existe, ingrese con sus credenciales de inicio de sesión</h4>
                              <a href='https://acil.mx/intranet' class='btn btn-primary btn-custom'>Inicia sesión</a>
                             ";
-            require($root.'templates/acil/successPage.php');
+            require($root.'templates/acil/errorPage.php');
         }
         //El COLABORADOR NO EXISTE
         else
@@ -154,21 +129,11 @@
         #CREA CARPETA PARA ALMACENAR DOCUMENTACION DE USUARIO
         if (!is_dir($carpeta)) 
         {
-            if (mkdir($carpeta, 0777)) 
-            { 
-                chmod($carpeta, 0777);
-            } 
-            else 
-            { 
-                //echo "Hubo un error al crear la carpeta.";
-            }
+           if (mkdir($carpeta, 0777)) { chmod($carpeta, 0777); } 
         } 
-        else 
-        {
-            //echo "La carpeta ya existe.";
-        }
+
         ////////////////// GENERAMOS TRATO /////////////////////
-        //require($root.'resources/PDFGenerator/SendToTrato.php');
+        require($root.'resources/PDFGenerator/genera_contrato.php');
         ////////////////// ENVIAMOS EMAIL DE BIENVENIDA /////////////////////
         require($root.'sendMailWelcome.php');
         ////////////////// CARGAMOS FORMULARIO DE CARGA DE DOCUMENTOS /////////////////////

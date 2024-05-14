@@ -22,7 +22,7 @@
         '{$table}', 
         '{$elementsToHide}', 
         {$optionalFunction}
-     );
+    );
                         ";
 
   //Variables que reciban si ya fue cargado el archivo correspondiente para control de boton Validacion
@@ -36,10 +36,10 @@
   function validateFile($name, $numero){
         global $idUsuario, $root, $folderBase, $domicilio, $identificacion, $pago, $contrato, $constancia;
         $archivo = $name.$idUsuario.".pdf";
-            $rutaArchivo = $root."docs/users/".$idUsuario."/".$archivo;
+            $rutaArchivo = $root."docs/partners/".$idUsuario."/".$archivo;
             if (file_exists($rutaArchivo)) {
                 if($numero==0){
-                    echo "<a href='/".$folderBase."docs/users/".$idUsuario."/".$archivo."'target='_blank'>[".$name."".$idUsuario.".pdf]</a>";
+                    echo "<a href='/".$folderBase."docs/partners/".$idUsuario."/".$archivo."'target='_blank'>[".$name."".$idUsuario.".pdf]</a>";
 
                     if($name=="comprobante_domicilio_"){ $domicilio=1; }
                     if($name=="identificacion_oficial_"){ $identificacion=1; }
@@ -59,7 +59,8 @@
                     echo "¡ADVERTENCIA! Límite por archivo: 4MB - Archivos más pesados no se subirán.";
                 } 
             } 
-    }
+  }
+
 ?>
 
 <!-- Formulario para carga de Documentos -->
@@ -93,17 +94,6 @@
       </div><br>
       <!-- ------------------------------------------------------------------------------------- -->
 
-      <!-- --------------------------CARGA DE CONSTANCIA DE SITUACION FISCAL---------------------------- -->
-      <div id="constancia"><label for="file" class="form-label label-custom">Constancia de Situación Fiscal</label>
-      <label id="constancia_label_edit" class='form-label' style='color:#e25b19'>
-        <?php validateFile("constancia_situacion_fiscal_",0);?>
-      </label>
-      <input type="file" name="constanciaFiscal" id="constanciaFiscal" class="form-control" accept=".pdf"/>
-      <div id='advertencia5' class='form-text' style='color: red;'>
-        <?php validateFile("constancia_situacion_fiscal_",1);?>
-      </div></div><br>
-      <!-- ------------------------------------------------------------------------------------- -->
-
       <!-- -------------------------------CARGA DE CONTRATO------------------------------------- -->
       <label for="contrato" class="form-label label-custom">Contrato</label>
       <label id="contrato_label_edit" class='form-label' style='color:#e25b19'>
@@ -115,25 +105,33 @@
       </div><br>
       <!-- ------------------------------------------------------------------------------------- -->
 
+      <!-- --------------------------CARGA DE CONSTANCIA DE SITUACION FISCAL---------------------------- -->
+      <div id="constancia"><label for="file" class="form-label label-custom">Constancia de Situación Fiscal</label>
+      <label id="constancia_label_edit" class='form-label' style='color:#e25b19'>
+        <?php validateFile("constancia_situacion_fiscal_",0);?>
+      </label>
+      <input type="file" name="constanciaFiscal" id="constanciaFiscal" class="form-control" accept=".pdf"/>
+      <div id='advertencia5' class='form-text' style='color: red;'>
+        <?php validateFile("constancia_situacion_fiscal_",1);?>
+      </div></div><br>
+      <!-- ------------------------------------------------------------------------------------- -->
 
-      
-      
-      
+      <!-- -------------------------------BOTONES------------------------------------- -->
       <div class="container-fluid d-flex justify-content-center align-items-center flex-wrap gap-2 mb-3">
-      <?php
-            //Se asigna boton para subir archivos se actualiza de acuerdo a cada carga
-            $btn="
-                    <center><input id='btnEnviar' class='btn btn-primary btn-custom text-center mr-3 mt-2' type='button' value='Subir Archivo' 
-                    onclick=\"{$functionParameters}\" disabled/></center>
-            ";echo $btn;
+        <?php
+              //Se asigna boton para subir archivos se actualiza de acuerdo a cada carga
+              $btn="
+                      <center><input id='btnEnviar' class='btn btn-primary btn-custom text-center mr-3 mt-2' type='button' value='Subir Archivo' 
+                      onclick=\"{$functionParameters}\" disabled/></center>
+              ";echo $btn;
 
-            //Se asigna boton de enviar a validacion, se dibuja de acuerdo al siguiente IF
-            if($domicilio==1 && $identificacion==1 && $pago==1 && $contrato==1){
-                $btn2="
-                    <center><input id='btnValidacion' class='btn btn-primary btn-custom text-center mt-2' type='button'  onclick='sendValidation()' value='Enviar a validación'/></center>
-                ";echo $btn2;
-            }
-      ?>
+              //Se asigna boton de enviar a validacion, se dibuja de acuerdo al siguiente IF
+              if($domicilio==1 && $identificacion==1 && $contrato==1){
+                  $btn2="
+                      <center><input id='btnValidacion' class='btn btn-primary btn-custom text-center mt-2' type='button'  onclick='sendValidation()' value='Enviar a validación'/></center>
+                  ";echo $btn2;
+              }
+        ?>
       </div>
     
     </div>

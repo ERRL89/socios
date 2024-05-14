@@ -131,7 +131,7 @@
                                                             </tbody>
                                                         </table>
                                                         <p class='text-dark text-justify' style='line-height: 24px; font-size: 16px; color: #1a202c; width: 100%; margin: 0;' align='justify'>
-                                                            Nos camplace darte la bienvenida a ACIL, es un gusto poder contar contigo. A continuaci&#243;n encontraras tus datos de para incio de sesi&#243;n.
+                                                            Nos camplace darte la bienvenida a ACIL, es un gusto poder contar contigo. A continuaci&#243;n encontraras tus datos para incio de sesi&#243;n.
                                                         </p>
                                                         <table class='s-3 w-full' role='presentation' border='0' cellpadding='0' cellspacing='0' style='width: 100%;' width='100%'>
                                                             <tbody>

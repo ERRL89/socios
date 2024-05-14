@@ -103,6 +103,7 @@
 
 	# $attachments => array(); -- Ejemplo ---> array('foto_ejemplo1.jpg', '../icons/foto_ejemplo2.png') -- (PARAMETRO OPCIONAL)
 
+	///////////////// FUNCIÓN PARA ENVIAR EMAIL  /////////////////////
 	function sendEmail($recipients, $sender, $mailSubject ,$mailPath, $mailData, $host, $user, $password, $attachments = array()){
 		
 		//Create an instance; passing `true` enables exceptions
@@ -165,6 +166,33 @@
 
 	}
 
-	///////////////// FUNCIÓN PARA ENVIAR EMAIL  /////////////////////
+	///////////////// FUNCIÓN PARA CREAR CONTRASEÑA DE USUARIO  /////////////////////
+	function createPass($nombre, $apellido)
+    {
+        //Extrae 1er nombre para contraseña
+        $partesNombre = explode(" ", $nombre);
+        //print_r($partesNombre); echo "<br>";
+        $nombrePass=ucfirst($partesNombre[0]);
+        //echo $nombrePass."<br><br>";
+
+        //Extrae 1er apellido para contraseña
+        $partesApellido = explode(" ", $apellido);
+        //print_r($partesApellido); echo "<br>";
+        $longApellido=count($partesApellido);
+
+        for($i=0;$i<=$longApellido-1;$i++)
+        {
+            if(strlen($partesApellido[$i])>3)
+            {
+                    $apellidoPass=ucfirst($partesApellido[$i]);
+                    //echo $apellidoPass;
+                    break;
+            }
+        }
+
+        $pass=$nombrePass.$apellidoPass."123@";
+        //echo "<br><br>".$pass;
+        return $pass;
+    }
 
 ?>

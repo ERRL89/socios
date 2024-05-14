@@ -3,7 +3,7 @@
 	include_once('config/config.php');
 	include_once('config/dbConf.php');
     include_once('functions.php');
-    require $root."templates/$theme/header.php";// template header page
+    require $root."templates/$theme/header.php";
 ?>
 
 <script>

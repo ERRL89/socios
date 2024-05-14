@@ -6,7 +6,7 @@
 ?>
 
 <!-- Formulario de Registro de Nuevo Usuario -->
-<div class="mb-5">
+<div id="formContainer" class="mb-5">
   <h2 class="text-center">Formulario de Registro</h2>
   <h5 class="text-center textCustom fw-bold">SOCIOS ACIL</h5>
   <h6 class="text-center">* Por favor llene los campos solicitados *</h6>
@@ -51,7 +51,7 @@
         </div>
       </div>
 
-      <span class="mb-5 fw-bold fst-italic fs-5 textCustom">Datos de contácto</span>
+      <span class="mb-5 fw-bold fst-italic fs-5 textCustom">Datos de contacto</span>
 
       <div class="mb-3 mt-3"><!-- Direccion: Calle - Numero - Codigo Postal -->
         <label for="direccion" class="form-label label-custom">Dirección:</label>
@@ -138,11 +138,30 @@
   </form>
 </div>
 
+<!-- Barra de progreso hacia upload files -->
+<div id="progressBar" style="display: none;">
+    <div class="">
+        <div class="w-100 h-100">
+            <div class="form-signin divCenter mt-4">
+                <div class="cajalogin divCenter">
+                    <div class="progress" style="width:75%;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="texto-sesion text-center">
+                        <h3>Guardando información</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Funcionalidad de codigo postal mediante api -->
 <script>
   const elemento = document.getElementById('cp');
   let selectColonia = document.getElementById('colonia');
   
+  //Consulta CP
   function miFuncion() {
       $.ajax({
 						url: 'resources/api_cp/cp.php',
@@ -182,8 +201,9 @@
             
             if (form.checkValidity())
             {
-              var progressBar = $('#progress-bar');
-              var progressText = $('#progress-text');
+              $('#formContainer').hide()
+              $('#progressBar').show()
+
               $.ajax({
                 url: 'registerProcess.php',
                 type: 'POST',
@@ -204,19 +224,9 @@
                     clabe: $('#clabe').val(),
                     rfc: $('#rfc').val()
                 },
-                xhr: function() {
-                    var xhr = new window.XMLHttpRequest();
-                    xhr.upload.addEventListener('progress', function(event) {
-                        if (event.lengthComputable) {
-                            var percentComplete = (event.loaded / event.total) * 100;
-                            progressBar.css('width', percentComplete + '%').attr('aria-valuenow', percentComplete);
-                            progressText.text('Procesando... ');
-                        }
-                    }, false);
-                    return xhr;
-                },
                 success: function(result) {
                     $('#principal').html(result);
+                    $('#progressBar').hide()
                 }
               });
             }
@@ -237,6 +247,7 @@
     let dia = fechaActual.getDate()
     let fechaFormateada = (dia < 10 ? '0' : '') + dia + '-' + (mes < 10 ? '0' : '') + mes + '-' + año
   })
+
   //Muestra botones cuando se resuelve Captcha
   function mostrarBotonContinuar() {
     $('#captchaCustom').hide();
